@@ -20,3 +20,12 @@
 <br>
 
 Spring Boot 自动处理加载配置文件的顺序。如果 application.yml 和 application.properties 同时存在并且有重复配置，可能会产生意外行为。所以一般建议选择其中一个进行管理。
+
+---
+
+### 4.Spring中的IoC
+![image](https://github.com/user-attachments/assets/cf43e102-a301-461b-ac0d-345618d04157)
+
+![image](https://github.com/user-attachments/assets/e40c1ec8-566e-4485-b462-80e531f08e5f)
+
+![image](https://github.com/user-attachments/assets/03ffb5ea-7b8c-40c8-8174-2c8c0ddfb379)
