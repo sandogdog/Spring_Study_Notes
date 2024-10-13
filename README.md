@@ -55,3 +55,67 @@ Spring Boot 自动处理加载配置文件的顺序。如果 application.yml 和
 ![image](https://github.com/user-attachments/assets/d1e025db-8285-4370-be54-a70e4c378e5c)
 
 ![image](https://github.com/user-attachments/assets/24076882-92ff-446e-a0c7-6a73654ba886)
+
+---
+
+# 7.事务失效的场景
+
+![image](https://github.com/user-attachments/assets/d34d8628-6368-4322-a548-d07099866006)
+
+![image](https://github.com/user-attachments/assets/70795823-ba6f-4859-af86-3576efde6e5a)
+
+![image](https://github.com/user-attachments/assets/e9f983ea-4706-4352-925c-e0e0ee939dd3)
+
+![image](https://github.com/user-attachments/assets/569100fd-9c58-44f5-a2b8-f7917f8ae9f6)
+
+---
+
+# 8.bean的生命周期
+
+![image](https://github.com/user-attachments/assets/195d251a-ca60-4d55-b308-f627168a7bad)
+
+![image](https://github.com/user-attachments/assets/83ac436f-4a98-4770-9377-aae785e6ee6b)
+
+![image](https://github.com/user-attachments/assets/0a659291-deef-4255-b013-4a894293a362)
+
+---
+
+# 9.bean的循环依赖（循环引用）
+
+![image](https://github.com/user-attachments/assets/ee0dd411-ab45-4769-8195-c166132acb1a)
+
+![image](https://github.com/user-attachments/assets/04311cfc-f014-4f8c-aa2a-fd50c67702c6)
+
+![image](https://github.com/user-attachments/assets/6d0829f6-783f-49cc-ae36-55c568a6c3e5)
+
+![image](https://github.com/user-attachments/assets/150c577b-7b96-411a-9f19-9b1325c7151a)
+
+![image](https://github.com/user-attachments/assets/f20dc1f6-88a4-4dcd-8a64-f62eb12e7097)
+
+![image](https://github.com/user-attachments/assets/69cf2454-823c-41ff-9c6e-1df245fec68d)
+
+![image](https://github.com/user-attachments/assets/4ca206d0-d02d-4b56-b507-f37638c52d14)
+
+![image](https://github.com/user-attachments/assets/69b0bdc1-0588-4517-aa47-524589a8763c)
+
+![image](https://github.com/user-attachments/assets/d13c6770-084f-45d0-8621-81ccbcceaac5)
+
+---
+
+# 10.Springmvc执行流程
+
+![image](https://github.com/user-attachments/assets/354c2e23-420c-475f-bf64-9f701471efbd)
+
+![image](https://github.com/user-attachments/assets/29d9640d-793a-4535-8f14-a4e388a5d063)
+
+![image](https://github.com/user-attachments/assets/5a4a0b21-f203-4f72-8a49-ae96a7fdf3b2)
+
+![image](https://github.com/user-attachments/assets/5dc7c171-4e88-4038-b5a0-861a0e59333c)
+
+---
+
+# 11.SpringBoot自动配置原理
+
+![image](https://github.com/user-attachments/assets/99a87059-686c-4275-98ca-2203f2be1992)
+
+![image](https://github.com/user-attachments/assets/39ec1ad5-815f-4b2c-984b-1e3af378e375)
