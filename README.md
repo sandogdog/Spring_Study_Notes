@@ -29,3 +29,29 @@ Spring Boot 自动处理加载配置文件的顺序。如果 application.yml 和
 ![image](https://github.com/user-attachments/assets/e40c1ec8-566e-4485-b462-80e531f08e5f)
 
 ![image](https://github.com/user-attachments/assets/03ffb5ea-7b8c-40c8-8174-2c8c0ddfb379)
+
+---
+
+# 5.单例bean是线程安全吗
+
+![image](https://github.com/user-attachments/assets/210caa1e-2fb9-409e-aaa8-e05a98105154)
+
+![image](https://github.com/user-attachments/assets/e8ecc4d6-75d1-4206-a1f8-fb10220b577e)
+
+![image](https://github.com/user-attachments/assets/915e1d3c-a32e-4bde-bd5a-aac9d632ad70)
+
+![image](https://github.com/user-attachments/assets/db6e06ab-560b-42d7-93ee-de3d68a96a4f)
+
+---
+
+# 6.AOP相关面试题
+
+![image](https://github.com/user-attachments/assets/5c328c04-e349-4537-bcaa-f0a267a1b17b)
+
+![image](https://github.com/user-attachments/assets/7be081f2-1c98-4412-8c79-3be7df3ea3d7)
+
+![image](https://github.com/user-attachments/assets/cf0fb2ec-6dba-4f55-919b-5909497e77b8)
+
+![image](https://github.com/user-attachments/assets/d1e025db-8285-4370-be54-a70e4c378e5c)
+
+![image](https://github.com/user-attachments/assets/24076882-92ff-446e-a0c7-6a73654ba886)
