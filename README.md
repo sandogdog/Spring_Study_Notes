@@ -119,3 +119,13 @@ Spring Boot 自动处理加载配置文件的顺序。如果 application.yml 和
 ![image](https://github.com/user-attachments/assets/99a87059-686c-4275-98ca-2203f2be1992)
 
 ![image](https://github.com/user-attachments/assets/39ec1ad5-815f-4b2c-984b-1e3af378e375)
+
+---
+
+# 12.spring框架常见的注解（spring，springmvc，springboot）
+
+![image](https://github.com/user-attachments/assets/ebb7b2ac-af88-49b4-9f93-01fd8ec74265)
+
+![image](https://github.com/user-attachments/assets/d003660a-58e3-4969-95ee-85d4dbb41037)
+
+![image](https://github.com/user-attachments/assets/0ede741c-985a-43b0-8949-9490c85b7a3d)
