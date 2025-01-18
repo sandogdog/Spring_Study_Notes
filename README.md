@@ -129,3 +129,13 @@ Spring Boot 自动处理加载配置文件的顺序。如果 application.yml 和
 ![image](https://github.com/user-attachments/assets/d003660a-58e3-4969-95ee-85d4dbb41037)
 
 ![image](https://github.com/user-attachments/assets/0ede741c-985a-43b0-8949-9490c85b7a3d)
+
+---
+
+# 13.@ControllerAdvice 的作用
+
+全局异常处理：统一处理应用程序中的所有控制器的异常。通过定义一个 @ExceptionHandler 方法，捕获指定的异常并进行处理。
+
+全局数据绑定：使用 @ModelAttribute 进行数据绑定，给所有控制器的方法提供公共的模型数据。
+
+全局初始化绑定：通过 @InitBinder 进行表单数据绑定，处理请求数据的预处理。
