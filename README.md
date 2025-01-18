@@ -139,3 +139,9 @@ Spring Boot 自动处理加载配置文件的顺序。如果 application.yml 和
 全局数据绑定：使用 @ModelAttribute 进行数据绑定，给所有控制器的方法提供公共的模型数据。
 
 全局初始化绑定：通过 @InitBinder 进行表单数据绑定，处理请求数据的预处理。
+
+---
+
+# 14.微服务结构
+
+![image](https://github.com/user-attachments/assets/0fef9d73-dd8e-42b1-ad1b-dfd20c77e280)
