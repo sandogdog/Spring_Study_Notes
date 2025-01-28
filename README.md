@@ -1,4 +1,4 @@
-# The_Notes_of_Spring
+![image](https://github.com/user-attachments/assets/2c573bca-94dc-4425-9373-1c4b5d0a7684)# The_Notes_of_Spring
 加油学习spirng框架。
 
 ---
@@ -145,3 +145,14 @@ Spring Boot 自动处理加载配置文件的顺序。如果 application.yml 和
 # 14.微服务结构
 
 ![image](https://github.com/user-attachments/assets/0fef9d73-dd8e-42b1-ad1b-dfd20c77e280)
+
+---
+
+# 15.server.port=${server.port:51701}
+
+在Spring Boot中，server.port=${server.port:51701}这种写法是不正确的，原因在于它会导致循环引用。让我们来详细分析一下为什么会出现这个问题，以及为什么修改后可以解决。
+1. 循环引用问题
+server.port=${server.port:51701}的含义是：
+尝试从环境变量或配置文件中读取server.port的值。
+如果server.port没有被设置，则使用默认值51701。
+然而，这里的问题是**server.port的值依赖于它自己**。Spring的占位符解析机制会尝试解析${server.port:51701}，但解析过程中会发现server.port的值尚未确定，因为它还在等待解析。这就形成了一个循环引用，导致Spring无法正确解析该值。
