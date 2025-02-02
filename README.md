@@ -1,4 +1,4 @@
-加油学习spirng框架。
+加油学习spring框架。
 
 ---
 
@@ -155,3 +155,142 @@ server.port=${server.port:51701}的含义是：
 尝试从环境变量或配置文件中读取server.port的值。
 如果server.port没有被设置，则使用默认值51701。
 然而，这里的问题是**server.port的值依赖于它自己**。Spring的占位符解析机制会尝试解析${server.port:51701}，但解析过程中会发现server.port的值尚未确定，因为它还在等待解析。这就形成了一个循环引用，导致Spring无法正确解析该值。
+
+---
+
+# 16.### **@Async 注解详解**
+
+在 Spring 中，`@Async` 注解用于将方法标记为异步执行，使得方法调用不会阻塞主线程，而是提交到线程池中执行。以下是 `@Async` 的详细使用说明和核心要点：
+
+---
+
+**1. 启用异步支持**
+在 Spring Boot 中，需通过 `@EnableAsync` 开启异步功能：
+```java
+@Configuration
+@EnableAsync
+public class AsyncConfig {
+}
+```
+
+**2. 基本使用**
+- **无返回值方法**：直接使用 `@Async`。
+  ```java
+  @Service
+  public class EmailService {
+      @Async
+      public void sendEmail(String to) {
+          // 模拟耗时操作
+      }
+  }
+  ```
+- **有返回值方法**：返回 `Future` 或 `CompletableFuture`。
+  ```java
+  @Async
+  public CompletableFuture<String> fetchData() {
+      return CompletableFuture.completedFuture("Data loaded");
+  }
+  ```
+
+**3. 线程池配置**
+Spring 默认使用 `SimpleAsyncTaskExecutor`（非池化，每次新建线程），但推荐自定义线程池。
+
+**方式 1：实现 `AsyncConfigurer` 接口**
+```java
+@Configuration
+@EnableAsync
+public class AsyncConfig implements AsyncConfigurer {
+    @Override
+    public Executor getAsyncExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(5);     // 核心线程数
+        executor.setMaxPoolSize(10);     // 最大线程数
+        executor.setQueueCapacity(100);  // 队列容量
+        executor.setThreadNamePrefix("Async-");
+        executor.initialize();
+        return executor;
+    }
+
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return new CustomAsyncExceptionHandler();
+    }
+}
+```
+
+**方式 2：直接定义 `TaskExecutor` Bean**
+```java
+@Bean(name = "customExecutor")
+public Executor customTaskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(3);
+    executor.setMaxPoolSize(5);
+    return executor;
+}
+
+// 使用指定线程池
+@Async("customExecutor")
+public void processTask() { /* ... */ }
+```
+
+---
+
+**4. 注意事项**
+- **方法可见性**：`@Async` 方法必须是 `public`，否则异步失效。
+- **同类调用**：同一个类内部调用 `@Async` 方法会绕过代理，导致异步失效。
+- **异常处理**：
+  - 默认异常不传播到调用线程，需通过 `AsyncUncaughtExceptionHandler` 处理。
+  ```java
+  public class CustomAsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
+      @Override
+      public void handleUncaughtException(Throwable ex, Method method, Object... params) {
+          // 记录异常日志或发送告警
+      }
+  }
+  ```
+- **事务管理**：异步方法中的数据库操作默认不在事务上下文中：
+  ```java
+  @Async
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
+  public void asyncWithTransaction() { /* ... */ }
+  ```
+
+**5. 常见场景**
+- **HTTP 请求非阻塞化**：将耗时操作（如文件处理、第三方调用）异步执行，快速释放 Tomcat 线程。
+- **批量任务并行处理**：拆分任务并行执行，提升吞吐量。
+  ```java
+  List<CompletableFuture<Void>> futures = dataList.stream()
+      .map(data -> CompletableFuture.runAsync(() -> process(data), executor))
+      .collect(Collectors.toList());
+  CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+  ```
+- **事件监听异步化**：结合 `@EventListener` 异步响应事件。
+  ```java
+  @EventListener
+  @Async
+  public void handleOrderEvent(OrderEvent event) {
+      // 异步处理事件
+  }
+  ```
+
+**6. 性能调优建议**
+- **合理设置线程池参数**：
+  - 计算密集型任务：核心线程数 ≈ CPU 核心数。
+  - IO 密集型任务：核心线程数可适当增大（如 2 × CPU 核心数）。
+- **监控线程池状态**：
+  - 使用 Spring Boot Actuator 的 `/actuator/metrics` 端点监控线程池活跃线程数、队列大小等。
+  - 自定义监控：通过 `ThreadPoolTaskExecutor` 的 `getThreadPoolExecutor()` 获取底层线程池统计信息。
+
+**7. 典型问题排查**
+- **异步未生效**：
+  - 检查是否添加了 `@EnableAsync`。
+  - 确保调用方不是同类中的其他方法。
+  - 确认方法是 `public` 的。
+- **线程池资源耗尽**：
+  - 调整 `maxPoolSize` 和 `queueCapacity`。
+  - 设置合理的拒绝策略（如 `ThreadPoolExecutor.CallerRunsPolicy`）。
+- **事务不生效**：
+  - 在异步方法上显式添加 `@Transactional`。
+
+**总结**
+`@Async` 是 Spring 提供的轻量级异步工具，能显著提升应用吞吐量和响应速度，但需注意线程池配置、事务管理及异常处理。合理使用时，建议结合业务场景定制线程池，并配合监控确保系统稳定。
